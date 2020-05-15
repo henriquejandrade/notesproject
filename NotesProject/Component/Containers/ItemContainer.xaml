@@ -1,0 +1,58 @@
+﻿<UserControl xmlns:Component="clr-namespace:NotesProject.Component"
+             x:Class="NotesProject.Component.Containers.ItemContainer"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:Buttons="clr-namespace:NotesProject.Component.Buttons"
+             xmlns:local="clr-namespace:NotesProject.Component.Containers"
+             mc:Ignorable="d" 
+             d:DesignHeight="250" d:DesignWidth="600">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50" />
+            <RowDefinition Height="50" />
+            <RowDefinition Height="1*" />
+        </Grid.RowDefinitions>
+
+        <!-- Title -->
+        <Buttons:ImageLabelButton Grid.Row="0"
+                                Text="{Binding Title}"
+                                Icon="/NotesProject;component/Images/Icons/Symbols/circle.png"
+                                Foreground="#FFF"
+                                FontFamily="Verdana"
+                                FontSize="16pt"
+                                Background="#555"/>
+
+        <!-- Controls -->
+        <StackPanel Grid.Row="1"
+                    Orientation="Horizontal"
+                    Background="#777">
+            <StackPanel.Resources>
+                <Style TargetType="{x:Type Buttons:ImageButton}">
+                    <Setter Property="Width" Value="50" />
+                    <Setter Property="Height" Value="50" />
+                    <Setter Property="Background" Value="#666" />
+                </Style>
+            </StackPanel.Resources>
+
+            <Buttons:ImageButton />
+            <Buttons:ImageButton />
+            <Buttons:ImageButton />
+        </StackPanel>
+
+        <!-- Timeline -->
+        <ScrollViewer Grid.Row="2"
+                      VerticalScrollBarVisibility="Auto">
+            <StackPanel x:Name="StackMessages"
+                        Background="#888">
+                <StackPanel.Resources>
+                    <Style TargetType="{x:Type Component:MessageComponent}">
+                        <Setter Property="MinHeight" Value="50" />
+                        <Setter Property="Background" Value="#777" />
+                    </Style>
+                </StackPanel.Resources>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</UserControl>

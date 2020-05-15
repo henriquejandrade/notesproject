@@ -1,0 +1,37 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Images\Icons\Nature\star.png" />
+    <None Remove="Images\Icons\Symbols\arrow_left.png" />
+    <None Remove="Images\Icons\Symbols\circle.png" />
+    <None Remove="Images\Icons\Symbols\cross_mark.png" />
+    <None Remove="Images\Icons\Symbols\dots.png" />
+    <None Remove="Images\Icons\Symbols\speech.png" />
+    <None Remove="Images\Icons\Things\globe.png" />
+    <None Remove="Images\Icons\Things\magnifier.png" />
+    <None Remove="Images\Icons\Things\paper.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Drawing.Common" Version="4.7.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\Icons\Nature\star.png" />
+    <Resource Include="Images\Icons\Symbols\arrow_left.png" />
+    <Resource Include="Images\Icons\Symbols\circle.png" />
+    <Resource Include="Images\Icons\Symbols\cross_mark.png" />
+    <Resource Include="Images\Icons\Symbols\dots.png" />
+    <Resource Include="Images\Icons\Symbols\speech.png" />
+    <Resource Include="Images\Icons\Things\globe.png" />
+    <Resource Include="Images\Icons\Things\magnifier.png" />
+    <Resource Include="Images\Icons\Things\paper.png" />
+  </ItemGroup>
+
+</Project>
