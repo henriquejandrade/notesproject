@@ -12,7 +12,7 @@ namespace NotesProject.Control.Database
 {
     class MainDB
     {
-        public OperationResult CreateDb()
+        public static OperationResult CreateDb()
         {
             OperationResult result = new OperationResult(-1, "error");
 
@@ -29,7 +29,7 @@ namespace NotesProject.Control.Database
             return result;
         }
 
-        public OperationResult Add(Item item)
+        public static OperationResult Add(Item item)
         {
             OperationResult result = new OperationResult(0, "couldn't add");
 
@@ -50,7 +50,7 @@ namespace NotesProject.Control.Database
             return result;
         }
 
-        public OperationResult ListAll()
+        public static OperationResult ListAll()
         {
             OperationResult result = new OperationResult(0, "couldn't list");
 
@@ -78,7 +78,7 @@ namespace NotesProject.Control.Database
             return result;
         }
 
-        public OperationResult GetPrevious()
+        public static OperationResult GetPrevious()
         {
             OperationResult result = new OperationResult(0, "couldn't find");
 
@@ -98,6 +98,69 @@ namespace NotesProject.Control.Database
             {
                 result.Code = -1;
                 result.Message = "fail";
+            }
+
+            return result;
+        }
+
+        public static OperationResult Update(Item item)
+        {
+            OperationResult result = new OperationResult(0, "couldn't update");
+
+            try
+            {
+                XDocument db = XDocument.Load("db.xml");
+                XElement items = db.Element("items");
+
+                XElement xItem = items.Elements("item").FirstOrDefault(x => x.Element("date").Value == item.Date.ToString());
+                if (xItem != null)
+                {
+                    xItem.Remove();
+                    items.Add(item.ToXElement());
+                    db.Save("db.xml");
+
+                    result = new OperationResult(1, "update successful");
+                }
+                else
+                {
+                    result.Code = -1;
+                    result.Message = "didn't find item";
+                }
+            }
+            catch
+            {
+                result = new OperationResult(-2, "couldn't update");
+            }
+
+            return result;
+        }
+
+        public static OperationResult Remove(Item item)
+        {
+            OperationResult result = new OperationResult(0, "couldn't remove");
+
+            try
+            {
+                XDocument db = XDocument.Load("db.xml");
+                XElement items = db.Element("items");
+
+                XElement xItem = items.Elements("item").FirstOrDefault(x => x.Element("date").Value == item.Date.ToString());
+                if (xItem != null)
+                {
+                    xItem.Remove();
+                    db.Save("db.xml");
+
+                    result = new OperationResult(1, "remove successful");
+                }
+                else
+                {
+                    result.Code = -1;
+                    result.Message = "didn't find item";
+                }
+            }
+            catch
+            {
+                result = new OperationResult(-2, "couldn't remove");
             }
 
             return result;

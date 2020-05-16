@@ -19,37 +19,24 @@ namespace NotesProject.Component
     /// </summary>
     public partial class MessageComponent : UserControl
     {
-        public ImageSource Icon
+        public string Text { get { return TextBoxInput.Text; } }
+
+        public event KeyEventHandler KeyUp
         {
-            get { return (ImageSource)GetValue(IconProperty); }
-            set { SetValue(IconProperty, value); }
+            add { TextBoxInput.KeyUp += value; }
+            remove { TextBoxInput.KeyUp -= value; }
         }
-
-        public static readonly DependencyProperty IconProperty =
-            DependencyProperty.Register("Icon", typeof(ImageSource), typeof(MessageComponent));
-
-        public TextAlignment TextAlignment
-        {
-            get { return (TextAlignment)GetValue(TextAlignmentProperty); }
-            set { SetValue(TextAlignmentProperty, value); }
-        }
-
-        public static readonly DependencyProperty TextAlignmentProperty =
-            DependencyProperty.Register("TextAlignment", typeof(TextAlignment), typeof(MessageComponent));
-
-        public string Message { get; set; }
 
         public MessageComponent()
         {
             InitializeComponent();
+
+            this.Loaded += MessageComponent_Loaded;
         }
 
-        public MessageComponent(string value, ItemType itemType)
+        private void MessageComponent_Loaded(object sender, RoutedEventArgs e)
         {
-            InitializeComponent();
-            DataContext = this;
-
-            this.Message = value;
+            TextBoxInput.Focus();
         }
     }
 }

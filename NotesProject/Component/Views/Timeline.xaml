@@ -8,34 +8,68 @@
              xmlns:Containers="clr-namespace:NotesProject.Component.Containers"
              xmlns:Component="clr-namespace:NotesProject.Component"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid x:Name="GridContainer">
-        <Containers:ItemContainer Title="teste" />
-        
-        <ScrollViewer x:Name="Scroller"
-                      Background="#EEEEEE"
-                      VerticalScrollBarVisibility="Auto"
-                      Visibility="Collapsed"
-                  >
-            <StackPanel x:Name="StackChat"
-                    VerticalAlignment="Bottom"
-                    >
-                <StackPanel.Resources>
-                    <Style TargetType="{x:Type Buttons:ImageLabelButton}">
-                        <Setter Property="Foreground" Value="#FFF" />
-                        <Setter Property="Background" Value="#777" />
-                        <Setter Property="HighlightedBackground" Value="#888" />
-                        <Setter Property="PressedBackground" Value="#999" />
-                        <Setter Property="Height" Value="50" />
-                        <Setter Property="Margin" Value="5,0,5,5" />
-                    </Style>
-                </StackPanel.Resources>
+             d:DesignHeight="900" d:DesignWidth="800">
 
-                <!--<TextBlock Text="12/05/2020" />
-                <Component:MessageComponent Message="Teste" />
-                <Component:MessageComponent Message="Teste" />
-                <Component:MessageComponent Message="Teste" />-->
-            </StackPanel>
-        </ScrollViewer>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="50" />
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <!--<local:Gallery Background="#EEEEEE"
+                           Visibility="Visible" />-->
+            
+            <ScrollViewer x:Name="Scroller"
+                          Background="#EEEEEE"
+                          VerticalScrollBarVisibility="Auto"
+                          Visibility="Visible">
+                <StackPanel Margin="5">
+                    <StackPanel x:Name="StackChat">
+                        <StackPanel.Resources>
+                            <Style TargetType="{x:Type Component:MessageComponent}">
+                                <Setter Property="Height" Value="50" />
+                                <Setter Property="Margin" Value="0,0,0,5" />
+                            </Style>
+
+                            <Style TargetType="{x:Type Containers:ItemContainer}">
+                                <Setter Property="Margin" Value="0,0,0,5" />
+                            </Style>
+                        </StackPanel.Resources>
+
+                        <Containers:ItemContainer  />
+                        <Containers:ItemContainer  />
+                        <Containers:ItemContainer  />
+                        <Containers:ItemContainer  />
+
+                        <!--<Buttons:ImageLabelButton Text="Teste" />
+                    <Buttons:ImageLabelButton Text="Teste" />
+                    <Buttons:ImageLabelButton Text="Teste" />
+                    <Component:MessageComponent  />-->
+                    </StackPanel>
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+
+        <StackPanel Grid.Row="1"
+                    Orientation="Horizontal"
+                    Background="#444">
+
+            <StackPanel.Resources>
+                <Style TargetType="{x:Type Buttons:ImageLabelButton}">
+                    <Setter Property="Background" Value="#777" />
+                    <Setter Property="HighlightedBackground" Value="#888" />
+                    <Setter Property="PressedBackground" Value="#999" />
+                    <Setter Property="Width" Value="50" />
+                    <Setter Property="Height" Value="50" />
+                </Style>
+            </StackPanel.Resources>
+
+            <Buttons:ImageLabelButton x:Name="ButtonText" 
+                                      Icon="/NotesProject;component/Images/Icons/Things/paper.png" />
+            <Buttons:ImageLabelButton x:Name="ButtonImage"  
+                                      Icon="/NotesProject;component/Images/Icons/Things/picture.png" />
+            <Buttons:ImageLabelButton Icon="/NotesProject;component/Images/Icons/Nature/globe.png" />
+        </StackPanel>
     </Grid>
 </UserControl>

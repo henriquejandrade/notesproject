@@ -12,38 +12,6 @@
         <!--<CommandBinding Command="Copy" Executed="CommandBinding_Executed"/>-->
     </Window.CommandBindings>
 
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="50"/>
-        </Grid.RowDefinitions>
-
-        <Views:Timeline Grid.Row="0"
-                        x:Name="Timeline"/>
-
-        <Grid Grid.Row="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="50px" />
-                <ColumnDefinition Width="1*" />
-            </Grid.ColumnDefinitions>
-
-            <Buttons:ImageButton Grid.Column="0"
-                                 x:Name="ButtonOptions"
-                                 Icon="/NotesProject;component/Images/Icons/Symbols/circle.png"
-                                 Background="#666"
-                                 HighlightedBackground="#CCCCCC"
-                                 PressedBackground="#DDDDDD"
-                                 />
-
-            <TextBox Grid.Column="1"
-                     x:Name="TextBoxInput"
-                     Text=""
-                     FontFamily="Verdana"
-                     FontSize="16pt"
-                     VerticalContentAlignment="Center"
-                     Padding="15px,0,0,0"
-                     BorderThickness="0"
-                 />
-        </Grid>
+    <Grid x:Name="MainGrid">
     </Grid>
 </Window>

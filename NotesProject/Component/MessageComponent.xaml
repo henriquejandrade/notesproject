@@ -1,4 +1,5 @@
-﻿<UserControl x:Class="NotesProject.Component.MessageComponent"
+﻿<UserControl xmlns:Buttons="clr-namespace:NotesProject.Component.Buttons"
+             x:Class="NotesProject.Component.MessageComponent"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -6,28 +7,36 @@
              xmlns:local="clr-namespace:NotesProject.Component"
              mc:Ignorable="d" 
              d:DesignHeight="50" d:DesignWidth="800">
-    <Grid x:Name="GridBox"
-          Background="{Binding Background}">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="50"/>
-            <ColumnDefinition Width="1*"/>
-        </Grid.ColumnDefinitions>
+    <Grid x:Name="GridBox">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50" />
+        </Grid.RowDefinitions>
 
-        <Image Grid.Column="0"
-               Source="{Binding Icon}"
-               RenderOptions.BitmapScalingMode="HighQuality"
-               />
+        <!-- Field -->
+        <Grid >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="50" />
+                <ColumnDefinition Width="1*" />
+            </Grid.ColumnDefinitions>
 
-        <TextBlock Grid.Column="1"
-                   Text="{Binding Message}"
-                   FontFamily="Verdana"
-                   FontSize="14pt"
-                   Foreground="{Binding Foreground}"
-                   TextAlignment="{Binding TextAlignment}"
-                   TextTrimming="CharacterEllipsis"
-                   VerticalAlignment="Center"
-                   Padding="25px,0 ,0,0"
-                   Margin="0"
-                   />
+            <!--Controls-->
+            <Buttons:ImageButton Grid.Column="0"
+                                 x:Name="ButtonCancel"
+                                 Icon="/NotesProject;component/Images/Icons/Symbols/cross_mark.png"
+                                 Background="#666"
+                                 HighlightedBackground="#777"
+                                 PressedBackground="#888"
+                                 />
+
+            <TextBox Grid.Column="1"
+                     x:Name="TextBoxInput"
+                     Text=""
+                     FontFamily="Verdana"
+                     FontSize="12pt"
+                     VerticalContentAlignment="Center"
+                     Padding="15px,0,0,0"
+                     BorderThickness="0"
+                 />
+        </Grid>
     </Grid>
 </UserControl>

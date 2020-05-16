@@ -7,6 +7,7 @@ using NotesProject.Model;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -30,46 +31,18 @@ namespace NotesProject.Control.View
             this.MyInterpreter = new Interpreter();
             this.MyRunner = new Runner();
 
-            this.MyDatabase.CreateDb();
+            MainDB.CreateDb();
         }
 
         public void Populate()
         {
-            OperationResult listResult = MyDatabase.ListAll();
-            if (listResult.Code > 0)
-            {
-                List<Item> items = (List<Item>)listResult.Data;
-                //DateTime currentDate = items[0].Date;
-                //AddDate(currentDate);
-                foreach (Item item in items)
-                {
-                    // Refreshes current date labelling
-                    //if (!item.Date.ToShortDateString().Equals(currentDate.ToShortDateString()))
-                    //{
-                    //    currentDate = item.Date;
-                    //    AddDate(currentDate);
-                    //}
-
-                    ImageLabelButton button = new ImageLabelButton()
-                    {
-                        Icon = GetIcon(item.Type),
-                        Text = item.Value
-                    };
-                    button.Click += (sender, e) => Item_Click(sender, e, item);
-
-                    MyView.StackChat.Children.Add(button);
-                }
-            }
-
-            MyView.Scroller.ScrollToBottom();
-
-            State = QueryType.Default;
+            
         }
 
         private void Item_Click(object sender, System.Windows.RoutedEventArgs e, Item item)
         {
-            MyView.Scroller.Visibility = System.Windows.Visibility.Collapsed;
-            MyView.GridContainer.Children.Add(CreateContainer(item));
+            //MyView.Scroller.Visibility = System.Windows.Visibility.Collapsed;
+            //MyView.GridContainer.Children.Add(CreateContainer(item));
         }
 
         private ImageSource GetIcon(ItemType itemType)
@@ -89,13 +62,24 @@ namespace NotesProject.Control.View
             }
         }
 
-        public ItemContainer CreateContainer(Item item)
+        //public ItemContainer CreateContainer(Item item)
+        //{
+        //    ItemContainer container = new ItemContainer()
+        //    {
+        //        Title = item.Value,
+        //        TitleIcon = GetIcon(item.Type),
+        //        SubItems = item.SubItems
+        //    };
+
+        //    container.ButtonTitle.Click += (sender, e) => ItemContainerTitle_Click(sender, e, container);
+
+        //    return container;
+        //}
+
+        private void ItemContainerTitle_Click(object sender, System.Windows.RoutedEventArgs e, ItemContainer container)
         {
-            return new ItemContainer()
-            {
-                Title = item.Value,
-                SubItems = item.SubItems
-            };
+            //MyView.GridContainer.Children.Remove(container);
+            //MyView.Scroller.Visibility = System.Windows.Visibility.Visible;
         }
 
         public void SetState(QueryType state)
@@ -123,7 +107,7 @@ namespace NotesProject.Control.View
             Item newItem = MyInterpreter.Parse(value, State);
 
             // Save
-            MyDatabase.Add(newItem);
+            MainDB.Add(newItem);
 
             // Execute
             MyRunner.Do(newItem);
@@ -151,7 +135,7 @@ namespace NotesProject.Control.View
         {
             get
             {
-                return (MyDatabase.GetPrevious().Data as Item).ToString();
+                return (MainDB.GetPrevious().Data as Item).ToString();
             }
         }
     }

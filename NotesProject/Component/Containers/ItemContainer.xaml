@@ -7,52 +7,101 @@
              xmlns:Buttons="clr-namespace:NotesProject.Component.Buttons"
              xmlns:local="clr-namespace:NotesProject.Component.Containers"
              mc:Ignorable="d" 
-             d:DesignHeight="250" d:DesignWidth="600">
+             d:DesignHeight="150" d:DesignWidth="600"
+             DataContext="{Binding MyControl}">
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="50" />
-            <RowDefinition Height="50" />
-            <RowDefinition Height="1*" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
+        <!-- Image -->
+        <Grid Grid.Row="0"
+              Background="#CCC"
+              MaxHeight="200">
+            <Image Grid.Row="0" 
+                   x:Name="ImageFrame" 
+                   RenderOptions.BitmapScalingMode="HighQuality"/>
+        </Grid>
+
         <!-- Title -->
-        <Buttons:ImageLabelButton Grid.Row="0"
-                                Text="{Binding Title}"
-                                Icon="/NotesProject;component/Images/Icons/Symbols/circle.png"
-                                Foreground="#FFF"
-                                FontFamily="Verdana"
-                                FontSize="16pt"
-                                Background="#555"/>
 
-        <!-- Controls -->
-        <StackPanel Grid.Row="1"
-                    Orientation="Horizontal"
-                    Background="#777">
-            <StackPanel.Resources>
-                <Style TargetType="{x:Type Buttons:ImageButton}">
-                    <Setter Property="Width" Value="50" />
-                    <Setter Property="Height" Value="50" />
-                    <Setter Property="Background" Value="#666" />
-                </Style>
-            </StackPanel.Resources>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="50" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="1*" />
+            </Grid.ColumnDefinitions>
 
-            <Buttons:ImageButton />
-            <Buttons:ImageButton />
-            <Buttons:ImageButton />
-        </StackPanel>
+            <Buttons:ImageButton x:Name="ButtonDone"
+                                 Icon="/NotesProject;component/Images/Icons/Symbols/tick.png" 
+                                 Background="#666"
+                                 HighlightedBackground="#777"
+                                 PressedBackground="#888" />
 
-        <!-- Timeline -->
-        <ScrollViewer Grid.Row="2"
-                      VerticalScrollBarVisibility="Auto">
-            <StackPanel x:Name="StackMessages"
-                        Background="#888">
+            <!-- Controls -->
+            <StackPanel Grid.Column="1"
+                        x:Name="GridControls"
+                        Orientation="Horizontal"
+                        Background="#777">
                 <StackPanel.Resources>
-                    <Style TargetType="{x:Type Component:MessageComponent}">
-                        <Setter Property="MinHeight" Value="50" />
+                    <Style TargetType="{x:Type Buttons:ImageButton}">
+                        <Setter Property="Width" Value="50" />
+                        <Setter Property="Height" Value="50" />
                         <Setter Property="Background" Value="#777" />
+                        <Setter Property="HighlightedBackground" Value="#888" />
+                        <Setter Property="PressedBackground" Value="#999" />
                     </Style>
                 </StackPanel.Resources>
+
+                <Buttons:ImageButton x:Name="ButtonNewText" Icon="/NotesProject;component/Images/Icons/Symbols/plus.png" />
+                <Buttons:ImageButton x:Name="ButtonEdit" Icon="/NotesProject;component/Images/Icons/Things/pencil.png" />
+                <!--<Buttons:ImageButton />-->
             </StackPanel>
-        </ScrollViewer>
+
+            <Buttons:ImageLabelButton Grid.Column="2"
+                                  x:Name="ButtonTitle"
+                                  Text=""
+                                  Foreground="#FFF"
+                                  FontFamily="Verdana"
+                                  FontSize="12pt"
+                                  Background="#555"
+                                  HighlightedBackground="#666"
+                                  PressedBackground="#777"
+                                  Height="50"/>
+        </Grid>
+
+        <Grid Grid.Row="2"
+              x:Name="GridBody"
+              Visibility="{Binding BodyVisibility}">
+
+            <!-- Timeline -->
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <StackPanel x:Name="StackSubItems"
+                        Background="#888">
+                    <StackPanel.Resources>
+                        <Style TargetType="{x:Type Buttons:ImageLabelButton}">
+                            <Setter Property="Icon" Value="/NotesProject;component/Images/Icons/Symbols/tick.png" />
+                            <Setter Property="Height" Value="50" />
+                            <Setter Property="FontFamily" Value="Verdana" />
+                            <Setter Property="FontSize" Value="12pt" />
+                            <Setter Property="Foreground" Value="#FFF" />
+                            <Setter Property="Background" Value="#777" />
+                            <Setter Property="HighlightedBackground" Value="#888" />
+                            <Setter Property="PressedBackground" Value="#999" />
+                        </Style>
+
+                        <Style TargetType="{x:Type Component:MessageComponent}">
+                            <Setter Property="Height" Value="50" />
+                            <Setter Property="Margin" Value="0" />
+                        </Style>
+                    </StackPanel.Resources>
+
+                    <!--<Buttons:ImageLabelButton Text="teste1" />
+                    <Buttons:ImageLabelButton Text="teste2" />-->
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
     </Grid>
 </UserControl>

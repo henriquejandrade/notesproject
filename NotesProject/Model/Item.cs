@@ -13,22 +13,10 @@ namespace NotesProject.Model
         public string Filename { get; set; }
         public ItemType Type { get; set; }
         public string Topic { get; set; }
-        private string _Value;
-        public string Value
-        {
-            get { return _Value; }
-            set
-            {
-                if (value != _Value)
-                {
-                    _Value = value;
-                    Notify("Value");
-                }
-            }
-        }
+        public string Value { get; set; }
         public List<SubItem> SubItems { get; set; }
 
-        public Item() { }
+        public Item() { SubItems = new List<SubItem>(); }
 
         public Item(XElement item)
         {
@@ -39,9 +27,13 @@ namespace NotesProject.Model
             Value = item.Element("value").Value;
 
             SubItems = new List<SubItem>();
-            foreach (XElement element in item.Elements("subitems"))
+            if (item.Element("subitems") != null)
             {
-                SubItems.Add(new SubItem(element));
+                SubItems = new List<SubItem>();
+                foreach (XElement element in item.Element("subitems").Elements("subitem"))
+                {
+                    SubItems.Add(new SubItem(element));
+                }
             }
         }
 

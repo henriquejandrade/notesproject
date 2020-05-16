@@ -1,4 +1,5 @@
-﻿using NotesProject.Model;
+﻿using NotesProject.Component.Views;
+using NotesProject.Model;
 using System;
 using System.Collections.Generic;
 using System.Text;
